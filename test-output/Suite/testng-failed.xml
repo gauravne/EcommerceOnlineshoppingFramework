@@ -6,7 +6,8 @@
       <class name="tests.OrderTest">
         <methods>
           <include name="setUp"/>
-          <include name="verifyAddProduct"/>
+          <include name="tearDown"/>
+          <include name="placeOrderTest"/>
         </methods>
       </class> <!-- tests.OrderTest -->
     </classes>

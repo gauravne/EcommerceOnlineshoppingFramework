@@ -2,6 +2,7 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,6 +32,9 @@ public class OrderTest extends BaseTest {
 		product.Backpack(); // add backpack
 		product.CartLink(); // add to cart
 		System.out.println("Add Product Test - Passed");
+		
+		Alert alert = driver.switchTo().alert();
+		alert.dismiss();
 		
 		CartPage cart = new CartPage(driver);
 		cart.CartDetails();
