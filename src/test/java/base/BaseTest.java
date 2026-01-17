@@ -22,28 +22,26 @@ public class BaseTest {
 		
 		ChromeOptions options = new ChromeOptions();
 
-		// Disable password manager
+		// Disable password manager & breach detection
 		Map<String, Object> prefs = new HashMap<>();
 		prefs.put("credentials_enable_service", false);
 		prefs.put("profile.password_manager_enabled", false);
-
-		// Disable notifications
-		prefs.put("profile.default_content_setting_values.notifications", 2);
+		prefs.put("profile.password_manager_leak_detection", false);
 
 		options.setExperimentalOption("prefs", prefs);
 
 		// Optional but recommended
+		options.addArguments("--disable-notifications");
 		options.addArguments("--disable-infobars");
-		options.addArguments("--disable-extensions");
-		options.addArguments("--start-maximized");
-
-		driver = new ChromeDriver(options);
+		options.addArguments("--disable-save-password-bubble");
 		
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(options);
 		driver.get("https://www.saucedemo.com/");
 		driver.manage().window().maximize();
 		
+
+
 	}
 	@AfterTest
 	public void tearDown()

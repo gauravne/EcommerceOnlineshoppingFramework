@@ -33,12 +33,12 @@ public class OrderTest extends BaseTest {
 		product.CartLink(); // add to cart
 		System.out.println("Add Product Test - Passed");
 		
-		Alert alert = driver.switchTo().alert();
-		alert.dismiss();
+	//	Alert alert = driver.switchTo().alert();
+	//	alert.dismiss();
 		
 		CartPage cart = new CartPage(driver);
 		cart.CartDetails();
-		Thread.sleep(5000);
+	//	Thread.sleep(5000);
 		cart.UserDetails("Mona", "Dhona", "90227788");
 		cart.continuebtn();
 		System.out.println("Cart details Test - Passed");
