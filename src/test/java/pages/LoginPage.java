@@ -7,7 +7,7 @@ import base.BaseTest;
 
 public class LoginPage{
 	
-	private WebDriver driver;
+	 WebDriver driver;
 	private By usernametext = By.id("user-name");
 	private By passnametext = By.id("password");
 	private By loginbtnclick = By.name("login-button");
