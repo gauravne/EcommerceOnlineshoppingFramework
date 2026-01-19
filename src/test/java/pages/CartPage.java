@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import utils.WaitUtils;
 
 public class CartPage {
 
@@ -10,7 +13,7 @@ public class CartPage {
 	private By Fname = By.id("first-name");
 	private By Lname = By.id("last-name");
 	private By PostalCode = By.id("postal-code");
-	private By continuebtn = By.id("continue");
+	public By continuebtn = By.id("continue");
 	public CartPage(WebDriver driver)
 	{
 		this.driver = driver;
@@ -28,9 +31,11 @@ public class CartPage {
 		driver.findElement(PostalCode).sendKeys(Postcode);
 	}
 	
-	public void continuebtn()
+	public WebElement continuebtn()
 	{
-		driver.findElement(continuebtn).click();
+		
+	WebElement element = driver.findElement(continuebtn);
+	return WaitUtils.waitForElementVisible(driver, element);
 	}
 	
 	

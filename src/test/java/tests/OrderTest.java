@@ -2,9 +2,13 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
@@ -12,17 +16,23 @@ import pages.CartPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductPage;
+import utils.ExcelUtils;
+import utils.ScreenshotUtils;
+import utils.WaitUtils;
 
 public class OrderTest extends BaseTest {
 	
-	@Test(priority=1)
-	public void placeOrderTest() throws InterruptedException
+	@Test(dataProviderClass = ExcelUtils.class, dataProvider = "TestData")
+	public void login(String user_name, String pass_word) throws InterruptedException, IOException
 	{
 		LoginPage loginpage = new LoginPage(driver);
-		loginpage.enterUsername("standard_user");
-		loginpage.enterpassword("secret_sauce");
-		loginpage.clickloginbtn();
-		Thread.sleep(3000);
+		
+	
+		loginpage.enterUsername(user_name);
+		loginpage.enterpassword(pass_word);
+		loginpage.clickloginbtn().click();
+		ScreenshotUtils.CaptureScreenshot();
+		
 		String actualTitle = driver.getTitle();
 		String expectedTitle = "Swag Labs";
 		Assert.assertEquals(actualTitle, expectedTitle);
@@ -39,8 +49,11 @@ public class OrderTest extends BaseTest {
 		CartPage cart = new CartPage(driver);
 		cart.CartDetails();
 	//	Thread.sleep(5000);
-		cart.UserDetails("Mona", "Dhona", "90227788");
-		cart.continuebtn();
+		cart.UserDetails("John", "Cook", "90227788");
+		
+	//	Utils util = new Utils();
+	
+		cart.continuebtn().click();
 		System.out.println("Cart details Test - Passed");
 		
 		CheckoutPage chkout = new CheckoutPage(driver);
@@ -50,6 +63,21 @@ public class OrderTest extends BaseTest {
 	    Assert.assertEquals(expectedOrderText, actualOrderText);
 	    
 	    System.out.println("Order is placed successfully");
+		ScreenshotUtils.CaptureScreenshot();
+	    
+	    
 	}
+/*	@DataProvider(name="login")
+	public Object[][] Testdata() 
+	{
+		return new Object[][] 
+				{
+					{"standard_user","secret_sauce"},
+					{"locked_out_user","standard_user"},
+					{"problem_user","secret_sauce"},
+					{"performance_glitch_user","standard_user"}
+				};
+	}
+	*/
 
 }

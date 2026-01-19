@@ -2,8 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import base.BaseTest;
+import utils.WaitUtils;
 
 public class LoginPage{
 	
@@ -28,9 +30,10 @@ public class LoginPage{
 		driver.findElement(passnametext).sendKeys(password);
 	}
 	
-	public void clickloginbtn()
+	public WebElement clickloginbtn()
 	{
-		driver.findElement(loginbtnclick).click();
 		
+		WebElement element = driver.findElement(loginbtnclick);
+		return WaitUtils.waitForElementVisible(driver, element);
 	}
 }
